@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as HomeImport } from './routes/home'
 import { Route as AboutImport } from './routes/about'
+import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 
 // Create/Update Routes
 
@@ -23,6 +24,11 @@ const HomeRoute = HomeImport.update({
 
 const AboutRoute = AboutImport.update({
   path: '/about',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DetailsItemIdRoute = DetailsItemIdImport.update({
+  path: '/details/$itemId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -38,11 +44,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
     }
+    '/details/$itemId': {
+      preLoaderRoute: typeof DetailsItemIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([AboutRoute, HomeRoute])
+export const routeTree = rootRoute.addChildren([
+  AboutRoute,
+  HomeRoute,
+  DetailsItemIdRoute,
+])
 
 /* prettier-ignore-end */
