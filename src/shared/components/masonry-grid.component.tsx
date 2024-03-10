@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router'
+
 import { MasonryGridOption } from '../models/masonry-grid.model'
 
 const MasonryGrid = ({ items }: { items?: MasonryGridOption[][] }) => {
@@ -8,15 +10,18 @@ const MasonryGrid = ({ items }: { items?: MasonryGridOption[][] }) => {
           return (
             <div key={i} className="grid gap-0">
               {grid.map((item) => (
-                <a key={item.id} href={item.id}>
-                  {' '}
+                <Link
+                  key={item.id}
+                  to={'/details/$itemId'}
+                  params={{ itemId: item.id }}
+                >
                   <img
                     key={item.src}
                     src={item.src}
                     alt={item.alt}
                     className="duration-300 ease-in-out hover:opacity-10"
                   ></img>
-                </a>
+                </Link>
               ))}
             </div>
           )

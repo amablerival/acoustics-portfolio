@@ -6,23 +6,21 @@ import Options from '@/shared/components/options.component'
 import HomeService from './home.service'
 
 const Home = () => {
-  const homeService = new HomeService()
+  const service = new HomeService()
   return (
-    // <div className="flex basis-11/12 items-center justify-center bg-blue">
     <div className="flex h-full w-full flex-col items-center text-white">
       <Container data={{ styleClasses: 'basis-1/4 bg-eggshell' }}>
-        <Options items={homeService.getTopData()}></Options>
+        <Options items={service.getTopData()}></Options>
       </Container>
-      <MasonryGrid items={homeService.getMiddleData()}></MasonryGrid>
+      <MasonryGrid items={service.getMiddleData()}></MasonryGrid>
       <Container
         data={{
           styleClasses: 'basis-1/6 flex-col bg-white text-orange py-5'
         }}
       >
-        <Header item={homeService.getBottomData()}></Header>
+        <Header item={service.getBottomData()}></Header>
       </Container>
     </div>
-    // </div>
   )
 }
 
