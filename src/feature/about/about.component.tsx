@@ -7,7 +7,6 @@ import AboutService from './about.service'
 const About = () => {
   const service = new AboutService()
   return (
-    // <div className="flex basis-11/12 items-center justify-center bg-blue">
     <div className="flex h-full w-full flex-col items-center text-white">
       <Container data={{ styleClasses: 'basis-1/4 bg-eggshell' }}>
         <Options items={service.getTopData()}></Options>
@@ -20,7 +19,6 @@ const About = () => {
         <Header item={service.getBottomData()}></Header>
       </Container>
     </div>
-    // </div>
   )
 }
 
