@@ -5,12 +5,11 @@ import ItemService from '@/shared/services/item.service'
 
 const Details = () => {
   const { itemId } = Route.useParams()
-  const item = new ItemService()
-    .getItems()
+  const item = ItemService()
     .flat()
     .find((f) => f.id == itemId)
   return (
-    <div className="flex h-full w-full flex-col items-center text-white">
+    <div className="size-full flex flex-col items-center text-white">
       <Container
         data={{
           styleClasses: 'basis-1/6 flex-col bg-white text-orange py-5'

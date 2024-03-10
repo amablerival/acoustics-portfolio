@@ -1,7 +1,7 @@
 import { MasonryGridOption } from '@/shared/models/masonry-grid.model'
 
-class ItemService {
-  getItems = (): MasonryGridOption[][] => [
+const ItemService = () => {
+  const getItems = (): MasonryGridOption[][] => [
     [
       {
         id: '4bf3aa82-ccce-4104-901d-9d1b99d0d9b7',
@@ -59,6 +59,7 @@ class ItemService {
       }
     ]
   ]
+  return getItems()
 }
 
 export default ItemService

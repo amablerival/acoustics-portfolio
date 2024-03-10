@@ -8,7 +8,7 @@ import HomeService from './home.service'
 const Home = () => {
   const service = new HomeService()
   return (
-    <div className="flex h-full w-full flex-col items-center text-white">
+    <div className="size-full flex flex-col items-center text-white">
       <Container data={{ styleClasses: 'basis-1/4 bg-eggshell' }}>
         <Options items={service.getTopData()}></Options>
       </Container>
