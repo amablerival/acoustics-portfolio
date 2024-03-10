@@ -3,12 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "homepage": "https://amablerival.github.io/acoustics-portfolio",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
