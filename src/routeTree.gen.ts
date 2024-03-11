@@ -10,64 +10,64 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as PlaygroundIndexImport } from './routes/playground.index'
-import { Route as HomeIndexImport } from './routes/home.index'
-import { Route as AboutIndexImport } from './routes/about.index'
-import { Route as DetailsItemIdImport } from './routes/details.$itemId'
+import { Route as rootRoute } from './routes/__root';
+import { Route as IndexImport } from './routes/index';
+import { Route as PlaygroundIndexImport } from './routes/playground.index';
+import { Route as HomeIndexImport } from './routes/home.index';
+import { Route as AboutIndexImport } from './routes/about.index';
+import { Route as DetailsItemIdImport } from './routes/details.$itemId';
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
+  getParentRoute: () => rootRoute
+} as any);
 
 const PlaygroundIndexRoute = PlaygroundIndexImport.update({
   path: '/playground/',
-  getParentRoute: () => rootRoute,
-} as any)
+  getParentRoute: () => rootRoute
+} as any);
 
 const HomeIndexRoute = HomeIndexImport.update({
   path: '/home/',
-  getParentRoute: () => rootRoute,
-} as any)
+  getParentRoute: () => rootRoute
+} as any);
 
 const AboutIndexRoute = AboutIndexImport.update({
   path: '/about/',
-  getParentRoute: () => rootRoute,
-} as any)
+  getParentRoute: () => rootRoute
+} as any);
 
 const DetailsItemIdRoute = DetailsItemIdImport.update({
   path: '/details/$itemId',
-  getParentRoute: () => rootRoute,
-} as any)
+  getParentRoute: () => rootRoute
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/details/$itemId': {
-      preLoaderRoute: typeof DetailsItemIdImport
-      parentRoute: typeof rootRoute
-    }
+      preLoaderRoute: typeof DetailsItemIdImport;
+      parentRoute: typeof rootRoute;
+    };
     '/about/': {
-      preLoaderRoute: typeof AboutIndexImport
-      parentRoute: typeof rootRoute
-    }
+      preLoaderRoute: typeof AboutIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/home/': {
-      preLoaderRoute: typeof HomeIndexImport
-      parentRoute: typeof rootRoute
-    }
+      preLoaderRoute: typeof HomeIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/playground/': {
-      preLoaderRoute: typeof PlaygroundIndexImport
-      parentRoute: typeof rootRoute
-    }
+      preLoaderRoute: typeof PlaygroundIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
@@ -78,7 +78,7 @@ export const routeTree = rootRoute.addChildren([
   DetailsItemIdRoute,
   AboutIndexRoute,
   HomeIndexRoute,
-  PlaygroundIndexRoute,
-])
+  PlaygroundIndexRoute
+]);
 
 /* prettier-ignore-end */
