@@ -1,7 +1,19 @@
 import { MasonryGridOption } from '@/shared/models/masonry-grid.model'
 
-const ItemService = () => {
-  const getItems = (): MasonryGridOption[][] => [
+interface ServiceModel<T> {
+  getItems: () =>  T[][]
+  findItem: ({itemId}: {itemId: string}) => T | undefined
+}
+
+class ItemService implements ServiceModel<MasonryGridOption> {
+  private static _instance: ItemService
+  public static getInstance(): ItemService {
+    if (!ItemService._instance) {
+      ItemService._instance = new ItemService()
+    }
+    return ItemService._instance
+  }
+  getItems = (): MasonryGridOption[][] => [
     [
       {
         id: '4bf3aa82-ccce-4104-901d-9d1b99d0d9b7',
@@ -59,7 +71,8 @@ const ItemService = () => {
       }
     ]
   ]
-  return getItems()
-}
 
+  findItem = ({itemId}: {itemId: string}): MasonryGridOption | undefined => this.getItems().flat().find((f) => f.id == itemId)
+}
+type IS = ItemService
 export default ItemService

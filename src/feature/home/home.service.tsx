@@ -4,14 +4,14 @@ import { ComponentModel } from '@/shared/models/component.model'
 import ItemService from '@/shared/services/item.service'
 
 class HomeService {
-  itemService = ItemService()
+  itemService = ItemService.getInstance()
   getTopData = (): ComponentModel[] => [
     { id: uuidv4(), title: 'BODY' },
     { id: uuidv4(), title: 'COUNT?', styleClasses: 'bg-white' },
     { id: uuidv4(), title: "don't" },
     { id: uuidv4(), title: 'lie!', styleClasses: 'bg-white' }
   ]
-  getMiddleData = () => this.itemService
+  getMiddleData = () => this.itemService.getItems()
   getBottomData = (): ComponentModel => ({
     id: uuidv4(),
     title: 'No sé, me importa un pito...',
