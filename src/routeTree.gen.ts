@@ -11,19 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as HomeImport } from './routes/home'
-import { Route as AboutImport } from './routes/about'
+import { Route as HomeIndexImport } from './routes/home.index'
+import { Route as AboutIndexImport } from './routes/about.index'
 import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 
 // Create/Update Routes
 
-const HomeRoute = HomeImport.update({
-  path: '/home',
+const HomeIndexRoute = HomeIndexImport.update({
+  path: '/home/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AboutRoute = AboutImport.update({
-  path: '/about',
+const AboutIndexRoute = AboutIndexImport.update({
+  path: '/about/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -36,16 +36,16 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/home': {
-      preLoaderRoute: typeof HomeImport
-      parentRoute: typeof rootRoute
-    }
     '/details/$itemId': {
       preLoaderRoute: typeof DetailsItemIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/': {
+      preLoaderRoute: typeof AboutIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/': {
+      preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -54,9 +54,9 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  AboutRoute,
-  HomeRoute,
   DetailsItemIdRoute,
+  AboutIndexRoute,
+  HomeIndexRoute,
 ])
 
 /* prettier-ignore-end */

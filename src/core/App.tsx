@@ -2,8 +2,8 @@
 
 import { Outlet } from '@tanstack/react-router'
 
-import Footer from './components/footer.component'
-import NavBar from './components/navbar.component'
+import Footer from './components/Footer'
+import NavBar from './components/Navbar'
 
 const App = () => {
   return (

@@ -1,12 +1,12 @@
 import * as Icon from 'react-feather'
 
-import LinkBar from './linkbar.component'
+import LinkBar from './Linkbar'
 
 const NavBar = ({ title }: { title: string }) => {
   const isDesktop = true
   return (
     <div className="basis-1/12 bg-black">
-      <div className="flex h-full w-full items-center p-5 text-white">
+      <div className="flex size-full items-center p-5 text-white">
         <div className="flex basis-1/2 justify-start text-orange">
           <Icon.Circle />
         </div>
