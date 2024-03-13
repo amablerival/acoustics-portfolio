@@ -1,8 +1,8 @@
 import { MasonryGridOption } from '@/shared/models/masonry-grid.model'
 
 interface ServiceModel<T> {
-  getItems: () =>  T[][]
-  findItem: ({itemId}: {itemId: string}) => T | undefined
+  getItems: () => T[][]
+  findItem: ({ itemId }: { itemId: string }) => T | undefined
 }
 
 class ItemService implements ServiceModel<MasonryGridOption> {
@@ -72,7 +72,9 @@ class ItemService implements ServiceModel<MasonryGridOption> {
     ]
   ]
 
-  findItem = ({itemId}: {itemId: string}): MasonryGridOption | undefined => this.getItems().flat().find((f) => f.id == itemId)
+  findItem = ({ itemId }: { itemId: string }): MasonryGridOption | undefined =>
+    this.getItems()
+      .flat()
+      .find((f) => f.id == itemId)
 }
-type IS = ItemService
 export default ItemService

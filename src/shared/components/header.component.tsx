@@ -5,9 +5,7 @@ const Header = ({ item }: { item: ComponentModel }) => {
     <>
       <h2 className="my-5 text-2xl">{item.title}</h2>
       <div className="my-5">
-        {item.description?.split('\n').map((m) => (
-          <p key={m}>{m}</p>
-        ))}
+        {item.description?.split('\n').map((m) => <p key={m}>{m}</p>)}
       </div>
       <a
         href={item?.url}
