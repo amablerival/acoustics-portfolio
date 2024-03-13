@@ -5,9 +5,9 @@ import ItemService from '@/shared/services/item.service'
 
 const Details = () => {
   const { itemId } = Route.useParams()
-  const item = ItemService.getInstance().findItem({itemId})
+  const item = ItemService.getInstance().findItem({ itemId })
   return (
-    <div className="size-full flex flex-col items-center text-white">
+    <div className="flex size-full flex-col items-center text-white">
       <Container
         data={{
           styleClasses: 'basis-1/6 flex-col bg-white text-orange py-5'
@@ -16,7 +16,11 @@ const Details = () => {
         <Header
           item={{ id: itemId, title: itemId, description: 'diz nutz' }}
         ></Header>
-        {item ? <img key={item?.src} src={item?.src} alt={item?.alt}></img> : <p>NO IMAGE</p>}
+        {item ? (
+          <img key={item?.src} src={item?.src} alt={item?.alt}></img>
+        ) : (
+          <p>NO IMAGE</p>
+        )}
       </Container>
     </div>
   )
