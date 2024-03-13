@@ -1,7 +1,7 @@
-import { createRootRoute, RootRoute } from '@tanstack/react-router'
+import { createRootRoute } from '@tanstack/react-router'
 
 import App from '@/core/App'
 
-export const Route: RootRoute = createRootRoute({
-  component: () => <App />
+export const Route = createRootRoute({
+  component: App
 })
