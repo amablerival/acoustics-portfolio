@@ -11,21 +11,21 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as HomeImport } from './routes/home'
-import { Route as AboutImport } from './routes/about'
+import { Route as HomeRouteImport } from './routes/home.route'
+import { Route as AboutRouteImport } from './routes/about.route'
 import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 
 // Create/Update Routes
 
-const HomeRoute = HomeImport.update({
+const HomeRouteRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/home.lazy').then((d) => d.Route))
 
-const AboutRoute = AboutImport.update({
+const AboutRouteRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const DetailsItemIdRoute = DetailsItemIdImport.update({
   path: '/details/$itemId',
@@ -37,11 +37,11 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/about': {
-      preLoaderRoute: typeof AboutImport
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRoute
     }
     '/home': {
-      preLoaderRoute: typeof HomeImport
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRoute
     }
     '/details/$itemId': {
@@ -54,8 +54,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  AboutRoute,
-  HomeRoute,
+  AboutRouteRoute,
+  HomeRouteRoute,
   DetailsItemIdRoute,
 ])
 
