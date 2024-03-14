@@ -1,1 +1,0 @@
-import{j as e}from"./index-CVwlygBK.js";const l=({items:t})=>{const r="flex h-full w-full items-center justify-center p-4 text-orange duration-300 ease-in-out hover:text-green";return e.jsx(e.Fragment,{children:t.map(s=>e.jsx("div",{className:`${r} ${s.styleClasses}`,children:e.jsxs("h2",{className:"text-2xl",children:[" ",s.title]})},s.id))})};export{l as O};
