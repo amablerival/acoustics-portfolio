@@ -11,11 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home.index'
 import { Route as AboutIndexImport } from './routes/about.index'
 import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 
 // Create/Update Routes
+
+const IndexRoute = IndexImport.update({
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const HomeIndexRoute = HomeIndexImport.update({
   path: '/home/',
@@ -36,6 +42,10 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/details/$itemId': {
       preLoaderRoute: typeof DetailsItemIdImport
       parentRoute: typeof rootRoute
@@ -54,6 +64,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
+  IndexRoute,
   DetailsItemIdRoute,
   AboutIndexRoute,
   HomeIndexRoute,
