@@ -18,7 +18,7 @@ const Box = (props: MeshProps) => {
   useFrame((state, delta) => {
     if (ref.current) {
       ref.current.rotation.x = Math.cos(Date.now() * 0.0005) * Math.PI * 0.5;
-      delta > 0.021
+      hovered
         ? (ref.current.rotation.y =
             Math.sin(Date.now() * 0.0005) * Math.PI * 0.5)
         : true;

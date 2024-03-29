@@ -10,17 +10,26 @@
 
 // Import Routes
 
+<<<<<<< HEAD
 import { Route as rootRoute } from './routes/__root';
 import { Route as IndexImport } from './routes/index';
 import { Route as PlaygroundIndexImport } from './routes/playground.index';
 import { Route as HomeIndexImport } from './routes/home.index';
 import { Route as AboutIndexImport } from './routes/about.index';
 import { Route as DetailsItemIdImport } from './routes/details.$itemId';
+=======
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as HomeIndexImport } from './routes/home.index'
+import { Route as AboutIndexImport } from './routes/about.index'
+import { Route as DetailsItemIdImport } from './routes/details.$itemId'
+>>>>>>> 3379a78 (router and threefiber)
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   path: '/',
+<<<<<<< HEAD
   getParentRoute: () => rootRoute
 } as any);
 
@@ -28,6 +37,10 @@ const PlaygroundIndexRoute = PlaygroundIndexImport.update({
   path: '/playground/',
   getParentRoute: () => rootRoute
 } as any);
+=======
+  getParentRoute: () => rootRoute,
+} as any)
+>>>>>>> 3379a78 (router and threefiber)
 
 const HomeIndexRoute = HomeIndexImport.update({
   path: '/home/',
@@ -49,9 +62,9 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/details/$itemId': {
       preLoaderRoute: typeof DetailsItemIdImport;
       parentRoute: typeof rootRoute;
