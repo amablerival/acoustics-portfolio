@@ -5,5 +5,5 @@ export interface ComponentModel {
   styleClasses?: string
   url?: string
   // link: '/'
-  link?: '/' | '/home' | '/about'
+  link?: '/' | '/home' | '/about' | '/playground'
 }

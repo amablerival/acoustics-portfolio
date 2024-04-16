@@ -1,10 +1,8 @@
-import Box from '@/shared/components/Box'
 import Container from '@/shared/components/Container'
 import Header from '@/shared/components/Header'
 import MasonryGrid from '@/shared/components/MasonryGrid'
 import Options from '@/shared/components/Options'
 
-import CanvasComponent from '../canvas/Canvas'
 import HomeService from './home.service'
 
 const Home = () => {
@@ -21,12 +19,6 @@ const Home = () => {
         }}
       >
         <Header item={service.getBottomData()}></Header>
-      </Container>
-      <Container data={{ styleClasses: 'bg-black' }}>
-        <CanvasComponent>
-          <Box position={[-1.2, 0, 0]} />
-          <Box position={[1.2, 0, 0]} />
-        </CanvasComponent>
       </Container>
     </div>
   )

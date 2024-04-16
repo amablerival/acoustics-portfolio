@@ -13,12 +13,12 @@ class NavbarService {
       id: uuidv4(),
       title: 'About',
       link: '/about'
+    },
+    {
+      id: uuidv4(),
+      title: 'Playground',
+      link: '/playground'
     }
-    // {
-    //   id: uuidv4(),
-    //   title: 'Contact',
-    //   link: '/contact'
-    // }
   ]
 }
 
