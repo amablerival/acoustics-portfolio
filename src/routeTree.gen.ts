@@ -19,14 +19,21 @@ import { Route as AboutIndexImport } from './routes/about.index';
 import { Route as DetailsItemIdImport } from './routes/details.$itemId';
 =======
 import { Route as rootRoute } from './routes/__root'
+<<<<<<< HEAD
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home.index'
 import { Route as AboutIndexImport } from './routes/about.index'
+=======
+import { Route as HomeRouteImport } from './routes/home.route'
+import { Route as AboutRouteImport } from './routes/about.route'
+import { Route as IndexRouteImport } from './routes/index.route'
+>>>>>>> main
 import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 >>>>>>> 3379a78 (router and threefiber)
 
 // Create/Update Routes
 
+<<<<<<< HEAD
 const IndexRoute = IndexImport.update({
   path: '/',
 <<<<<<< HEAD
@@ -38,6 +45,20 @@ const PlaygroundIndexRoute = PlaygroundIndexImport.update({
   getParentRoute: () => rootRoute
 } as any);
 =======
+=======
+const HomeRouteRoute = HomeRouteImport.update({
+  path: '/home',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/home.lazy').then((d) => d.Route))
+
+const AboutRouteRoute = AboutRouteImport.update({
+  path: '/about',
+>>>>>>> main
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const IndexRouteRoute = IndexRouteImport.update({
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 >>>>>>> 3379a78 (router and threefiber)
@@ -62,7 +83,19 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+<<<<<<< HEAD
       preLoaderRoute: typeof IndexImport
+=======
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/about': {
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/home': {
+      preLoaderRoute: typeof HomeRouteImport
+>>>>>>> main
       parentRoute: typeof rootRoute
     }
     '/details/$itemId': {
@@ -87,7 +120,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
+<<<<<<< HEAD
   IndexRoute,
+=======
+  IndexRouteRoute,
+  AboutRouteRoute,
+  HomeRouteRoute,
+>>>>>>> main
   DetailsItemIdRoute,
   AboutIndexRoute,
   HomeIndexRoute,

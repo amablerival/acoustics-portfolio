@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import * as Icon from 'react-feather'
 
 import LinkBar from './Linkbar'
@@ -8,7 +9,9 @@ const NavBar = ({ title }: { title: string }) => {
     <div className="basis-1/12 bg-black">
       <div className="flex size-full items-center p-5 text-white">
         <div className="flex basis-1/2 justify-start text-orange">
-          <Icon.Circle />
+          <Link to={'/'} activeProps={{ className: 'text-white' }}>
+            <Icon.Circle size={31} />
+          </Link>
         </div>
         <div className="flex basis-1/4 justify-center">
           <h1 className="text-center text-3xl capitalize">{title}</h1>
