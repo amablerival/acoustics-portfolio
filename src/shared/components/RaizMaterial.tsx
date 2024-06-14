@@ -1,57 +1,67 @@
 /* eslint-disable react/no-unknown-property */
-import { MeshProps, useFrame, useLoader } from '@react-three/fiber'
-import { useRef, useState } from 'react'
-import { Mesh, TextureLoader } from 'three'
+import { MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
+import { ThreeEvent } from '@react-three/fiber/dist/declarations/src/core/events';
+import { useRef, useState } from 'react';
+import { Mesh, TextureLoader, Vector2, Vector3, Vector4 } from 'three';
+
+import fragmentShader from '../shaders/textureFragment';
+import vertexShader from '../shaders/textureVertex';
+import { UniformMap } from './WaveShaderMaterial';
+
+export const lightingParams = {
+  Ka: { value: new Vector4(1, 1, 1) },
+  Kd: { value: new Vector3(1, 1, 1) },
+  Ks: { value: new Vector3(1, 1, 1) },
+  LightIntensity: { value: new Vector4(1.0, 1.0, 1.0, 1.0) },
+  LightPosition: { value: new Vector4(0.0, 2000.0, 0.0, 1.0) },
+  Shininess: { value: 2.0 }
+};
 
 const RaizMaterial = (props: MeshProps) => {
   // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef<Mesh>(null)
-  const basePath = 'textures/Wood026_4K-JPG/'
+  const ref = useRef<Mesh>(null);
+  const basePath = 'textures';
+  const materialName = '/Wood026_4K-JPG';
   const [colorMap, displacementMap, normalMap, roughnessMap] = useLoader(
     TextureLoader,
-    [
-      'Wood026_4K-JPG_Color.jpg',
-      'Wood026_4K-JPG_Displacement.jpg',
-      'Wood026_4K-JPG_NormalDX.jpg',
-      'Wood026_4K-JPG_Roughness.jpg'
-    ].map((m) => basePath + m)
-  )
+    ['_Color.jpg', '_Displacement.jpg', '_NormalDX.jpg', '_Roughness.jpg'].map(
+      (m) => basePath + materialName + materialName + m
+    )
+  );
+  const uniforms: UniformMap = {
+    ...lightingParams,
+    uTexture: { value: colorMap },
+    uDisplacement: { value: displacementMap }
+    // perlinFactor: params.perlinFactor,
+    // randomFactor: params.randomFactor
+  };
 
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
+  // const [onHover, hover] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => {
-    if (ref.current) {
-      ref.current.rotation.x = Math.cos(Date.now() * 0.0005) * Math.PI * 0.5
-      delta > 0.0015
-        ? (ref.current.rotation.y =
-            Math.sin(Date.now() * 0.00005) * Math.PI * 0.5)
-        : true
-    } else {
-      delta
-    }
-  })
+  // useFrame((state, delta) => {
+  //   if (ref.current && !onHover) {
+  //     ref.current.rotation.x += ref.current.rotation.y + 0.01;
+  //   }
+  // });
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
     <mesh
       {...props}
       ref={ref}
-      scale={2.5}
-      onClick={() => click(!clicked)}
-      //   onPointerOver={() => hover(true)}
-      //   onPointerOut={() => hover(false)}
+      scale={3.0}
+      onPointerEnter={() => hover(true)}
+      onPointerLeave={() => hover(false)}
+      // onPointerMove={animate}
     >
-      <sphereGeometry args={[1, 100, 100]} />
-      <meshStandardMaterial
-        displacementScale={0.0125}
-        map={colorMap}
-        displacementMap={displacementMap}
-        normalMap={normalMap}
-        roughnessMap={roughnessMap}
-      />
+      <boxGeometry args={[1, 1, 1]} />
+      {/* <sphereGeometry args={[1, 64, 64]} /> */}
+      <shaderMaterial
+        fragmentShader={fragmentShader()}
+        vertexShader={vertexShader()}
+        uniforms={uniforms}
+      ></shaderMaterial>
     </mesh>
-  )
-}
+  );
+};
 
-export default RaizMaterial
+export default RaizMaterial;

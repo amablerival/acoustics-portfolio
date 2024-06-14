@@ -1,22 +1,15 @@
 /* eslint-disable react/no-unknown-property */
-import { Canvas } from '@react-three/fiber'
-import { PropsWithChildren } from 'react'
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { PropsWithChildren } from 'react';
 
 const CanvasComponent: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Canvas className="flex min-h-96">
-      <ambientLight intensity={Math.PI} />
-      <spotLight
-        position={[10, 10, 10]}
-        angle={0.45}
-        penumbra={1}
-        decay={0}
-        intensity={Math.PI}
-      />
-      <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       {children}
+      <OrbitControls />
     </Canvas>
-  )
-}
+  );
+};
 
-export default CanvasComponent
+export default CanvasComponent;
