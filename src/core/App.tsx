@@ -1,9 +1,7 @@
-// import Home from '@/feature/home/home.component'
+import { Outlet } from '@tanstack/react-router';
 
-import { Outlet } from '@tanstack/react-router'
-
-import Footer from './components/Footer'
-import NavBar from './components/Navbar'
+import Footer from './components/Footer';
+import NavBar from './components/Navbar';
 
 const App = () => {
   return (
@@ -14,7 +12,7 @@ const App = () => {
       </div>
       <Footer></Footer>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

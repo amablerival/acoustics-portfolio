@@ -1,7 +1,7 @@
-import Container from '@/shared/components/Container'
-import RaizMaterial from '@/shared/components/RaizMaterial'
+import Container from '@/shared/components/Container';
+import RaizMaterial from '@/shared/components/RaizMaterial';
 
-import CanvasComponent from '../canvas/Canvas'
+import CanvasComponent from '../canvas/Canvas';
 
 const Playground = () => {
   return (
@@ -12,7 +12,7 @@ const Playground = () => {
         </CanvasComponent>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Playground
+export default Playground;

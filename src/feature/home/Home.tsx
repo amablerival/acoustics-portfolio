@@ -1,12 +1,12 @@
-import Container from '@/shared/components/Container'
-import Header from '@/shared/components/Header'
-import MasonryGrid from '@/shared/components/MasonryGrid'
-import Options from '@/shared/components/Options'
+import Container from '@/shared/components/Container';
+import Header from '@/shared/components/Header';
+import MasonryGrid from '@/shared/components/MasonryGrid';
+import Options from '@/shared/components/Options';
 
-import HomeService from './home.service'
+import HomeService from './home.service';
 
 const Home = () => {
-  const service = new HomeService()
+  const service = new HomeService();
   return (
     <div className="flex size-full flex-col items-center text-white">
       <Container data={{ styleClasses: 'basis-1/4 bg-eggshell' }}>
@@ -21,7 +21,7 @@ const Home = () => {
         <Header item={service.getBottomData()}></Header>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
