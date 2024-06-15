@@ -15,9 +15,9 @@ module.exports = {
     {
       files: '.prettierrc',
       options: {
-        parser: 'json',
-      },
-    },
+        parser: 'json'
+      }
+    }
   ],
-  plugins: [require('prettier-plugin-tailwindcss')],
+  plugins: [require('prettier-plugin-tailwindcss')]
 };
