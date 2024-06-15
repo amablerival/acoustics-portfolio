@@ -9,10 +9,8 @@ import {
   Vector4
 } from 'three';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import shaderVertex from '../shaders/shaderVertex.glsl';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
@@ -21,12 +19,10 @@ import { lightingParams } from '../config/lighting.config';
 const RaizMaterial = (props: MeshProps) => {
   // This reference gives us direct access to the THREE.Mesh object
   const [onTick, tick] = useState(0.0);
-  useFrame((_, delta) => {
-    tick(delta);
-  });
+
   const ref = useRef<Mesh>(null);
-  const basePath = 'textures';
-  const materialName = '/Wood026_4K-JPG';
+  const basePath = 'textures/local';
+  const materialName = '/Marble006_4K-JPG';
   const [colorMap, displacementMap, normalMap, roughnessMap] = useLoader(
     TextureLoader,
     ['_Color.jpg', '_Displacement.jpg', '_NormalDX.jpg', '_Roughness.jpg'].map(
@@ -38,17 +34,21 @@ const RaizMaterial = (props: MeshProps) => {
     uTexture: { value: colorMap },
     uDisplacement: { value: displacementMap },
     u_resolution: { value: new Vector2(1500.0, 1500.0) },
-    u_time: { value: onTick }
+    uTime: { value: 0 }
   };
   const shaderMaterialConfig: ShaderMaterialParameters = {
     uniforms: uniforms,
     fragmentShader: shaderFragment,
     vertexShader: shaderVertex
   };
-
+  useFrame((state) => {
+    const tick = Math.floor(Date.now() / 1000);
+    shaderMaterialConfig.uniforms!.uTime.value = +state.clock.elapsedTime;
+  });
   return (
-    <mesh {...props} ref={ref} scale={3.0}>
-      <boxGeometry args={[1, 1, 1]} />
+    <mesh {...props} ref={ref} scale={1.6}>
+      {/* <boxGeometry args={[1, 1, 1]} /> */}
+      <sphereGeometry args={[1.0, 100, 100]} />
       <shaderMaterial args={[shaderMaterialConfig]}></shaderMaterial>
     </mesh>
   );

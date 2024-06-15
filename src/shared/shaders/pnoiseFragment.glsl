@@ -8,7 +8,7 @@ uniform float u_time;
 #include "/node_modules/lygia/generative/pnoise.glsl";
 
 vec4 pnoise() {
-    float bias = 1.0;
+    float bias = 1.2;
     vec4 color = vec4(vec3(0.0), 1.0);
     vec2 pixel = 1.0/u_resolution.xy;
     vec2 st = gl_FragCoord.xy * pixel;
