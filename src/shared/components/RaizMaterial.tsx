@@ -1,11 +1,19 @@
-/* eslint-disable react/no-unknown-property */
-import { MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { ThreeEvent } from '@react-three/fiber/dist/declarations/src/core/events';
-import { useRef, useState } from 'react';
-import { Mesh, TextureLoader, Vector2, Vector3, Vector4 } from 'three';
+import { MeshProps, useLoader } from '@react-three/fiber';
+import { useRef } from 'react';
+import {
+  Mesh,
+  ShaderMaterialParameters,
+  TextureLoader,
+  Vector3,
+  Vector4
+} from 'three';
 
-import fragmentShader from '../shaders/textureFragment';
-import vertexShader from '../shaders/textureVertex';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import vertexShader from '../shaders/raizVertex.glsl';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import textureFragment from '../shaders/textureFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
 
 export const lightingParams = {
@@ -32,34 +40,17 @@ const RaizMaterial = (props: MeshProps) => {
     ...lightingParams,
     uTexture: { value: colorMap },
     uDisplacement: { value: displacementMap }
-    // perlinFactor: params.perlinFactor,
-    // randomFactor: params.randomFactor
+  };
+  const shaderMaterialConfig: ShaderMaterialParameters = {
+    uniforms: uniforms,
+    fragmentShader: textureFragment,
+    vertexShader: vertexShader
   };
 
-  // const [onHover, hover] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame((state, delta) => {
-  //   if (ref.current && !onHover) {
-  //     ref.current.rotation.x += ref.current.rotation.y + 0.01;
-  //   }
-  // });
-  // Return the view, these are regular Threejs elements expressed in JSX
   return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={3.0}
-      onPointerEnter={() => hover(true)}
-      onPointerLeave={() => hover(false)}
-      // onPointerMove={animate}
-    >
+    <mesh {...props} ref={ref} scale={3.0}>
       <boxGeometry args={[1, 1, 1]} />
-      {/* <sphereGeometry args={[1, 64, 64]} /> */}
-      <shaderMaterial
-        fragmentShader={fragmentShader()}
-        vertexShader={vertexShader()}
-        uniforms={uniforms}
-      ></shaderMaterial>
+      <shaderMaterial args={[shaderMaterialConfig]}></shaderMaterial>
     </mesh>
   );
 };
