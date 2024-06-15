@@ -12,5 +12,20 @@ export default [
     files: ['**/*.jsx'],
     languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
   },
-  pluginReactConfig
+  pluginReactConfig,
+  {
+    ignores: [
+      '/node_modules',
+      '/scripts',
+      '/config',
+      '/pnpm-lock.yaml',
+      '/pnpm-workspace.yaml',
+      '.DS_Store',
+      '/package.json',
+      '/tsconfig.json',
+      '**/*.md',
+      'build',
+      '.eslintrc.js'
+    ]
+  }
 ];
