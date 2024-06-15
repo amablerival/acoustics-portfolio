@@ -1,32 +1,29 @@
-import { MeshProps, useLoader } from '@react-three/fiber';
-import { useRef } from 'react';
+import { MeshProps, useFrame, useLoader } from '@react-three/fiber';
+import { useRef, useState } from 'react';
 import {
   Mesh,
   ShaderMaterialParameters,
   TextureLoader,
+  Vector2,
   Vector3,
   Vector4
 } from 'three';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import vertexShader from '../shaders/raizVertex.glsl';
+import shaderVertex from '../shaders/shaderVertex.glsl';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import textureFragment from '../shaders/textureFragment.glsl';
+import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
-
-export const lightingParams = {
-  Ka: { value: new Vector4(1, 1, 1) },
-  Kd: { value: new Vector3(1, 1, 1) },
-  Ks: { value: new Vector3(1, 1, 1) },
-  LightIntensity: { value: new Vector4(1.0, 1.0, 1.0, 1.0) },
-  LightPosition: { value: new Vector4(0.0, 2000.0, 0.0, 1.0) },
-  Shininess: { value: 2.0 }
-};
+import { lightingParams } from '../config/lighting.config';
 
 const RaizMaterial = (props: MeshProps) => {
   // This reference gives us direct access to the THREE.Mesh object
+  const [onTick, tick] = useState(0.0);
+  useFrame((_, delta) => {
+    tick(delta);
+  });
   const ref = useRef<Mesh>(null);
   const basePath = 'textures';
   const materialName = '/Wood026_4K-JPG';
@@ -39,12 +36,14 @@ const RaizMaterial = (props: MeshProps) => {
   const uniforms: UniformMap = {
     ...lightingParams,
     uTexture: { value: colorMap },
-    uDisplacement: { value: displacementMap }
+    uDisplacement: { value: displacementMap },
+    u_resolution: { value: new Vector2(1500.0, 1500.0) },
+    u_time: { value: onTick }
   };
   const shaderMaterialConfig: ShaderMaterialParameters = {
     uniforms: uniforms,
-    fragmentShader: textureFragment,
-    vertexShader: vertexShader
+    fragmentShader: shaderFragment,
+    vertexShader: shaderVertex
   };
 
   return (
