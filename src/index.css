@@ -4,13 +4,17 @@
 
 @font-face {
   font-family: 'VG5000';
-  src: local('VG5000'), url('/fonts/VG5000-Regular_web.woff') format('woff'),
+  src:
+    local('VG5000'),
+    url('/fonts/VG5000-Regular_web.woff') format('woff'),
     url('/fonts/VG5000-Regular_web.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Sligoil';
-  src: local('Sligoil'), url('/fonts/Sligoil-Micro.woff') format('woff'),
+  src:
+    local('Sligoil'),
+    url('/fonts/Sligoil-Micro.woff') format('woff'),
     url('/fonts/Sligoil-Micro.woff2') format('woff2');
 }
 

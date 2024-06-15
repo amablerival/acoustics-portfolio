@@ -11,25 +11,31 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as HomeRouteImport } from './routes/home.route'
-import { Route as AboutRouteImport } from './routes/about.route'
-import { Route as IndexRouteImport } from './routes/index.route'
+import { Route as IndexImport } from './routes/index'
+import { Route as PlaygroundIndexImport } from './routes/playground.index'
+import { Route as HomeIndexImport } from './routes/home.index'
+import { Route as AboutIndexImport } from './routes/about.index'
 import { Route as DetailsItemIdImport } from './routes/details.$itemId'
 
 // Create/Update Routes
 
-const HomeRouteRoute = HomeRouteImport.update({
-  path: '/home',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/home.lazy').then((d) => d.Route))
-
-const AboutRouteRoute = AboutRouteImport.update({
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
-
-const IndexRouteRoute = IndexRouteImport.update({
+const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlaygroundIndexRoute = PlaygroundIndexImport.update({
+  path: '/playground/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HomeIndexRoute = HomeIndexImport.update({
+  path: '/home/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutIndexRoute = AboutIndexImport.update({
+  path: '/about/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,19 +49,38 @@ const DetailsItemIdRoute = DetailsItemIdImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/home': {
-      preLoaderRoute: typeof HomeRouteImport
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
     '/details/$itemId': {
+      id: '/details/$itemId'
+      path: '/details/$itemId'
+      fullPath: '/details/$itemId'
       preLoaderRoute: typeof DetailsItemIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/home/': {
+      id: '/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/playground/': {
+      id: '/playground/'
+      path: '/playground'
+      fullPath: '/playground'
+      preLoaderRoute: typeof PlaygroundIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -63,11 +88,44 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
-  IndexRouteRoute,
-  AboutRouteRoute,
-  HomeRouteRoute,
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
   DetailsItemIdRoute,
-])
+  AboutIndexRoute,
+  HomeIndexRoute,
+  PlaygroundIndexRoute,
+})
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/details/$itemId",
+        "/about/",
+        "/home/",
+        "/playground/"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/details/$itemId": {
+      "filePath": "details.$itemId.tsx"
+    },
+    "/about/": {
+      "filePath": "about.index.tsx"
+    },
+    "/home/": {
+      "filePath": "home.index.tsx"
+    },
+    "/playground/": {
+      "filePath": "playground.index.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

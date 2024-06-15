@@ -1,13 +1,12 @@
 {
-  "extends": ["prettier", "plugin:node/recommended"],
-  "plugins": ["prettier"],
+  "react/no-unknown-property": ["off", { "ignore": ["JSX", "TSX"] }],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "off"
-      }
-    ],
+    "prettier/prettier": ["error", {}],
     "no-unused-vars": "warn",
     "no-console": "off",
     "func-names": "off",
