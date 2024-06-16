@@ -18,7 +18,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
-    }
+    },
+    "types": ["vite-plugins-glsl/ext"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

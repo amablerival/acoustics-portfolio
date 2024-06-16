@@ -1,27 +1,31 @@
-/* eslint-disable react/no-unknown-property */
-import { MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { ThreeEvent } from '@react-three/fiber/dist/declarations/src/core/events';
+import { MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import { useRef, useState } from 'react';
-import { Mesh, TextureLoader, Vector2, Vector3, Vector4 } from 'three';
+import {
+  Mesh,
+  ShaderMaterialParameters,
+  TextureLoader,
+  Vector2,
+  Vector3,
+  Vector4
+} from 'three';
 
-import fragmentShader from '../shaders/textureFragment';
-import vertexShader from '../shaders/textureVertex';
+// @ts-expect-error
+import shaderVertex from '../shaders/shaderVertex.glsl';
+// @ts-expect-error
+import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
-
-export const lightingParams = {
-  Ka: { value: new Vector4(1, 1, 1) },
-  Kd: { value: new Vector3(1, 1, 1) },
-  Ks: { value: new Vector3(1, 1, 1) },
-  LightIntensity: { value: new Vector4(1.0, 1.0, 1.0, 1.0) },
-  LightPosition: { value: new Vector4(0.0, 2000.0, 0.0, 1.0) },
-  Shininess: { value: 2.0 }
-};
-
-const RaizMaterial = (props: MeshProps) => {
+import { lightingParams } from '../config/lighting.config';
+interface RaizProps extends MeshProps {
+  mesh: MeshProps;
+  texture: string;
+}
+const RaizMaterial: React.FC<RaizProps> = ({ mesh, texture }) => {
   // This reference gives us direct access to the THREE.Mesh object
+  const [onTick, tick] = useState(0.0);
+
   const ref = useRef<Mesh>(null);
-  const basePath = 'textures';
-  const materialName = '/Wood026_4K-JPG';
+  const basePath = 'textures/local';
+  const materialName = '/' + texture;
   const [colorMap, displacementMap, normalMap, roughnessMap] = useLoader(
     TextureLoader,
     ['_Color.jpg', '_Displacement.jpg', '_NormalDX.jpg', '_Roughness.jpg'].map(
@@ -31,35 +35,25 @@ const RaizMaterial = (props: MeshProps) => {
   const uniforms: UniformMap = {
     ...lightingParams,
     uTexture: { value: colorMap },
-    uDisplacement: { value: displacementMap }
-    // perlinFactor: params.perlinFactor,
-    // randomFactor: params.randomFactor
+    uDisplacement: { value: displacementMap },
+    uNormal: { value: normalMap },
+    uRoughness: { value: roughnessMap },
+    u_resolution: { value: new Vector2(1500.0, 1500.0) },
+    uTime: { value: 0 }
   };
-
-  // const [onHover, hover] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame((state, delta) => {
-  //   if (ref.current && !onHover) {
-  //     ref.current.rotation.x += ref.current.rotation.y + 0.01;
-  //   }
-  // });
-  // Return the view, these are regular Threejs elements expressed in JSX
+  const shaderMaterialConfig: ShaderMaterialParameters = {
+    uniforms: uniforms,
+    fragmentShader: shaderFragment,
+    vertexShader: shaderVertex
+  };
+  useFrame((state) => {
+    shaderMaterialConfig.uniforms!.uTime.value = +state.clock.elapsedTime;
+  });
   return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={3.0}
-      onPointerEnter={() => hover(true)}
-      onPointerLeave={() => hover(false)}
-      // onPointerMove={animate}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      {/* <sphereGeometry args={[1, 64, 64]} /> */}
-      <shaderMaterial
-        fragmentShader={fragmentShader()}
-        vertexShader={vertexShader()}
-        uniforms={uniforms}
-      ></shaderMaterial>
+    <mesh {...mesh} ref={ref} scale={1.6}>
+      {/* <boxGeometry args={[1, 1, 1]} /> */}
+      <sphereGeometry args={[1.0, 100, 100]} />
+      <shaderMaterial args={[shaderMaterialConfig]}></shaderMaterial>
     </mesh>
   );
 };
