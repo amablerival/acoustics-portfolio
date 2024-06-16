@@ -15,14 +15,17 @@ import shaderVertex from '../shaders/shaderVertex.glsl';
 import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
 import { lightingParams } from '../config/lighting.config';
-
-const RaizMaterial = (props: MeshProps) => {
+interface RaizProps extends MeshProps {
+  mesh: MeshProps;
+  texture: string;
+}
+const RaizMaterial: React.FC<RaizProps> = ({ mesh, texture }) => {
   // This reference gives us direct access to the THREE.Mesh object
   const [onTick, tick] = useState(0.0);
 
   const ref = useRef<Mesh>(null);
   const basePath = 'textures/local';
-  const materialName = '/Marble006_4K-JPG';
+  const materialName = '/' + texture;
   const [colorMap, displacementMap, normalMap, roughnessMap] = useLoader(
     TextureLoader,
     ['_Color.jpg', '_Displacement.jpg', '_NormalDX.jpg', '_Roughness.jpg'].map(
@@ -33,6 +36,8 @@ const RaizMaterial = (props: MeshProps) => {
     ...lightingParams,
     uTexture: { value: colorMap },
     uDisplacement: { value: displacementMap },
+    uNormal: { value: normalMap },
+    uRoughness: { value: roughnessMap },
     u_resolution: { value: new Vector2(1500.0, 1500.0) },
     uTime: { value: 0 }
   };
@@ -42,11 +47,10 @@ const RaizMaterial = (props: MeshProps) => {
     vertexShader: shaderVertex
   };
   useFrame((state) => {
-    const tick = Math.floor(Date.now() / 1000);
     shaderMaterialConfig.uniforms!.uTime.value = +state.clock.elapsedTime;
   });
   return (
-    <mesh {...props} ref={ref} scale={1.6}>
+    <mesh {...mesh} ref={ref} scale={1.6}>
       {/* <boxGeometry args={[1, 1, 1]} /> */}
       <sphereGeometry args={[1.0, 100, 100]} />
       <shaderMaterial args={[shaderMaterialConfig]}></shaderMaterial>
