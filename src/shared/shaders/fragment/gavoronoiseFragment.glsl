@@ -5,7 +5,7 @@
 uniform float uTime;
 
 #define PI 3.14159265358979
-vec2 m = vec2(.7,.8);
+// vec2 m = vec2(.7,.4);
 
 float hash( in vec2 p ) {
     return fract(sin(p.x*15.32+p.y*5.78) * 43758.236237153);
@@ -18,18 +18,18 @@ vec2 hash2(vec2 p) {
 mat2 m2= mat2(.8,.6,-.6,.8);
 
 // Gabor/Voronoi mix 3x3 kernel (some artifacts for v=1.)
-float gavoronoi3(in vec2 p) {    
+float gavoronoi3(in vec2 p) {
     vec2 ip = floor(p);
     vec2 fp = fract(p);
     float f = 0.6*PI;//frequency
-    float v = 1.0;//cell variability <1.
+    float v = 0.7;//cell variability <1.
     float dv = 0.0;//direction variability <1.
-    vec2 dir = m + sin(uTime);//vec2(.7,.7);
+    vec2 dis = vec2(sin(uTime) + 0.25, cos(uTime) + 0.25);
+    vec2 dir = dis;//vec2(.7,.7);
     float va = 0.0;
    	float wt = 0.0;
     for (int i=-1; i<=1; i++) 
-	for (int j=-1; j<=1; j++) 
-	{		
+	for (int j=-1; j<=1; j++) {		
         vec2 o = vec2(i, j)-.5;
         vec2 h = hash2(ip - o);
         vec2 pp = fp +o;
@@ -60,7 +60,7 @@ vec3 nor(in vec2 p) {
 }
 
 float gavoronoiseMan(vec2 p) {
-    vec3 light = normalize(vec3(3., 2., -1.));
+    vec3 light = normalize(vec3(2., 1., -1.));
 	float r = dot(nor(p), light);
     return r;
 }
