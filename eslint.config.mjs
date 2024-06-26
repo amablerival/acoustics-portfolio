@@ -27,6 +27,5 @@ export default [
       'build',
       '.eslintrc.js'
     ]
-  },
-  { extends: ['plugin:react/jsx-runtime'] }
+  }
 ];

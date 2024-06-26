@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import { Mesh, ShaderMaterialParameters, TextureLoader, Vector2 } from 'three';
