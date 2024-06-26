@@ -1,14 +1,6 @@
 import { MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import { useRef, useState } from 'react';
-import {
-  Mesh,
-  ShaderMaterialParameters,
-  TextureLoader,
-  Vector2,
-  Vector3,
-  Vector4
-} from 'three';
-
+import { Mesh, ShaderMaterialParameters, TextureLoader, Vector2 } from 'three';
 // @ts-expect-error
 import shaderVertex from '../shaders/shaderVertex.glsl';
 // @ts-expect-error
