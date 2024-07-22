@@ -42,7 +42,7 @@ void main() {
 
     float g = clamp(gavoronoiseMan(vPosition.xy), -0.5, 0.1);
     float n = noise(vPosition + uTime);
-    float bias = (sin(uTime * 0.05) * 0.1) + 0.2;
+    float bias = (sin(uTime * 0.05) * 0.1) + 0.05;
 
     vec2 baseUV = rotate2D(n + g) * vPosition.xy * bias;
     float basePattern = lines(baseUV, 0.1);

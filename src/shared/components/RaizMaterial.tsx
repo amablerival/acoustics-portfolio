@@ -28,7 +28,7 @@ const RaizMaterial: React.FC<RaizProps> = ({ mesh }) => {
     side: DoubleSide
   };
   useFrame((state) => {
-    setTime(state.clock.elapsedTime * 1.1);
+    setTime(state.clock.elapsedTime * 0.16);
   });
   return (
     <mesh {...mesh} ref={ref} scale={1.0}>
