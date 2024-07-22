@@ -1,13 +1,11 @@
-varying vec3 Normal;
-varying vec3 Position;
+varying vec3 vNormal;
+varying vec3 vPosition;
 varying vec2 vUv;
 
-#include "./vertex/displacementVertex.glsl"
 void main() {
-    Normal = normalize(normalMatrix * normal);
-    Position = vec3(modelViewMatrix * vec4(position, 1.0));
+    vNormal = normalize(normalMatrix * normal);
+    vPosition = vec3(modelViewMatrix * vec4(position, 0.0));
 
-    vec3 newPosition = displacement();
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
     vUv = uv;
 }

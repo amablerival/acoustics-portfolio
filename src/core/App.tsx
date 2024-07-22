@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Outlet } from '@tanstack/react-router';
 
 import Footer from './components/Footer';
@@ -7,7 +8,7 @@ const App = () => {
   return (
     <div className="flex h-screen w-full flex-col justify-start overflow-hidden">
       <NavBar title="Raíz"></NavBar>
-      <div className="flex h-full basis-11/12 items-center justify-center overflow-y-auto bg-blue">
+      <div className="flex h-full basis-11/12 items-center justify-center overflow-y-auto bg-none">
         <Outlet />
       </div>
       <Footer></Footer>
