@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import 'index.css';
 
 import { createRouter, RouterProvider } from '@tanstack/react-router';
@@ -7,7 +6,10 @@ import { createRoot } from 'react-dom/client';
 
 import { routeTree } from './routeTree.gen';
 
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  basepath: '/acoustics-portfolio/'
+});
 
 declare module '@tanstack/react-router' {
   interface Register {
