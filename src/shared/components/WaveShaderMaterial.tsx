@@ -1,8 +1,7 @@
-import { shaderMaterial } from '@react-three/drei';
+// import { shaderMaterial } from '@react-three/drei';
 import {
   Color,
   CubeTexture,
-  IUniform,
   Matrix3,
   Matrix4,
   Quaternion,
@@ -12,8 +11,8 @@ import {
   Vector4
 } from 'three';
 
-import textureFragment from '../shaders/textureFragment';
-import textureVertex from '../shaders/textureVertex';
+// import textureFragment from '../shaders/textureFragment';
+// import textureVertex from '../shaders/textureVertex';
 
 export type UniformMap = {
   [uniform: string]:

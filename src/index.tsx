@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import 'index.css';
 
 import { createRouter, RouterProvider } from '@tanstack/react-router';

@@ -5,9 +5,7 @@
 import { MeshProps, useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import { DoubleSide, Mesh, ShaderMaterialParameters, Vector4 } from 'three';
-// @ts-expect-error
 import shaderVertex from '../shaders/shaderVertex.glsl';
-// @ts-expect-error
 import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
 interface RaizProps extends MeshProps {
