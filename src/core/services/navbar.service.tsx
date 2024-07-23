@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 
-import { ComponentModel } from '@/shared/models/component.model'
+import { ComponentModel } from '@/shared/models/component.model';
 
 class NavbarService {
-  getNavbarConfig = (): ComponentModel[] => [
+  private routes: ComponentModel[] = [
     {
       id: uuidv4(),
       title: 'Home',
@@ -13,13 +13,15 @@ class NavbarService {
       id: uuidv4(),
       title: 'About',
       link: '/about'
-    },
-    {
-      id: uuidv4(),
-      title: 'Playground',
-      link: '/playground'
     }
-  ]
+    // {
+    //   id: uuidv4(),
+    //   title: 'Playground',
+    //   link: '/playground'
+    // }
+  ];
+
+  getNavbarConfig = () => this.routes;
 }
 
-export default NavbarService
+export default NavbarService;
