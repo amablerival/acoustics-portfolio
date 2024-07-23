@@ -1,10 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { MeshProps, useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
-import { DoubleSide, Mesh, ShaderMaterialParameters, Vector4 } from 'three';
+import {
+  DoubleSide,
+  Mesh,
+  ShaderMaterialParameters,
+  Vector3,
+  Vector4
+} from 'three';
 import shaderVertex from '../shaders/shaderVertex.glsl';
 import shaderFragment from '../shaders/shaderFragment.glsl';
 import { UniformMap } from './WaveShaderMaterial';
@@ -17,7 +19,16 @@ const RaizMaterial: React.FC<RaizProps> = ({ mesh }) => {
   const [time, setTime] = useState(0);
   const uniforms: UniformMap = {
     uTime: { value: time },
-    uResolution: { value: new Vector4() }
+    uResolution: { value: new Vector4() },
+    uPrimaryColor: {
+      value: new Vector3(0.71, 0.37, 0.15) // #B55E27
+    },
+    uSecondaryColor: {
+      value: new Vector3(0.38, 0.42, 0.22) // #606C38
+    },
+    uAccentColor: {
+      value: new Vector3(0.11, 0.13, 0.11) // #1D211D
+    }
   };
   const shaderMaterialConfig: ShaderMaterialParameters = {
     uniforms: uniforms,

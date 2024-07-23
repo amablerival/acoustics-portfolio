@@ -53,6 +53,10 @@ typings/
 # Optional eslint cache
 .eslintcache
 
+# Apple cache
+.DS_Store
+*/**/.DS_Store
+
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/

@@ -1,23 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 
-module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    colors: {
-      black: '#0d0d09',
-      blue: '#1D2D44',
-      green: '#13432B',
-      orange: '#F8B051',
-      gray: '#6E7678',
-      eggshell: '#F0EBD8',
-      white: '#FFFFFF',
-      'blue-light': '#748CAB'
-    },
-    fontFamily: {
-      sans: ['VG5000', 'sans-serif'],
-      monospace: ['Sligoil', 'monospace']
-    },
-    extend: {}
+export const content = ['./src/**/*.{js,ts,jsx,tsx}'];
+export const theme = {
+  colors: {
+    black: '#0d0d09',
+    white: '#FFFFFF',
+    green: '#283618',
+    'dark-green': '#1D211D',
+    orange: '#E49855',
+    'dark-orange': '#B55E27',
+    accent: '#606C38',
+    offwhite: '#FEFAE0'
   },
-  plugins: []
+  fontFamily: {
+    display: ['VG5000', 'sans-serif'],
+    body: ['Sligoil', 'monospace']
+  },
+  extend: {}
 };
+export const plugins = [];
