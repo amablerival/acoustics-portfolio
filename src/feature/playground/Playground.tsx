@@ -12,7 +12,7 @@ const Playground = () => {
       </div>
       <Container data={{ styleClasses: 'back-overlay' }}>
         <CanvasComponent>
-          <RaizMaterial mesh={{ position: [0, 0, 4.1] }} />
+          {/* <RaizMaterial mesh={{ position: [0, 0, 4.1] }} /> */}
         </CanvasComponent>
       </Container>
     </div>
