@@ -5,5 +5,11 @@ export interface ComponentModel {
   description?: string;
   styleClasses?: string;
   url?: string;
-  link?: '/' | '/home' | '/about' | '/playground';
+  link?:
+    | '/'
+    | '/home'
+    | '/about'
+    | '/playground'
+    | '/materiales'
+    | '/proyectos';
 }

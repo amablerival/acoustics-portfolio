@@ -13,12 +13,17 @@ class NavbarService {
       id: uuidv4(),
       title: 'About',
       link: '/about'
+    },
+    {
+      id: uuidv4(),
+      title: 'Materiales',
+      link: '/materiales'
+    },
+    {
+      id: uuidv4(),
+      title: 'Proyects',
+      link: '/proyectos'
     }
-    // {
-    //   id: uuidv4(),
-    //   title: 'Playground',
-    //   link: '/playground'
-    // }
   ];
 
   getNavbarConfig = () => this.routes;
