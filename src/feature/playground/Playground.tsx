@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import Container from '@/shared/components/Container';
 import RaizMaterial from '@/shared/components/RaizMaterial';
 
